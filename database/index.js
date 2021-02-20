@@ -39,4 +39,4 @@ let save = (repoData) => {
 }
 
 module.exports.save = save;
-// module.exports.Repo = Repo;
+module.exports.Repo = Repo;

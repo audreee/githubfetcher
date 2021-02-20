@@ -1,6 +1,7 @@
 const express = require('express');
 const getReposByUsername = require('../helpers/github.js').getReposByUsername;
 const save = require('../database/index.js').save;
+const Repo = require('../database/index.js').Repo;
 
 let app = express();
 
@@ -32,6 +33,18 @@ app.post('/repos', (req, res) => {
 app.get('/repos', function (req, res) {
   // TODO - your code here!
   // This route should send back the top 25 repos
+
+  // query db and sort in descending order by forks_count (and alphabetically for ties), limits to top 25
+  Repo.find().sort( { forks_count: -1, name: 1 } ).limit(25).exec((err, results) => {
+    if (err) {
+      console.error(err);
+      res.status(400)
+    } else {
+      // console.log('get query results ', results);
+      res.status(200).send(results);
+    }
+  });
+
 });
 
 let port = 1128;

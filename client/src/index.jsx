@@ -15,7 +15,7 @@ class App extends React.Component {
 
   handleSearchResults(returnedRepos) {
     this.setState({repos: returnedRepos});
-    console.log(returnedRepos);
+    // console.log(returnedRepos);
   }
 
   search (username, callback) {
