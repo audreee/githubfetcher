@@ -1,17 +1,15 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/fetcher');
-
-
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  // we're connected!
+mongoose.connect('mongodb://localhost/fetcher', (err) => {
+  if (err) {
+    console.error(err);
+  } else {
+    console.log(`Database is connected`);
+  }
 });
 
-
 let repoSchema = mongoose.Schema({
-  repo_id: Number,
-  owner_id: Number
+  _id: Number,
+  owner_id: Number,
   name: String,
   url: String,
   forks_count: Number
@@ -26,7 +24,7 @@ let save = (repoData) => {
 
   repoData.forEach(repo => {
     newRepo = new Repo({
-      repo_id: repo.id,
+      _id: repo.id,
       owner_id: repo.owner.id,
       name: repo.name,
       url: repo.url,
@@ -37,7 +35,7 @@ let save = (repoData) => {
       console.log(newRepo);
     })
   })
-
 }
 
 module.exports.save = save;
+// module.exports.Repo = Repo;
