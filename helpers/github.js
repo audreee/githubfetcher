@@ -1,6 +1,5 @@
 const axios = require('axios');
 const config = require('../config.js');
-const save = require('../database/index.js').save;
 
 let getReposByUsername = (username, callback) => {
   // TODO - Use the axios module to request repos for a specific
@@ -20,8 +19,10 @@ let getReposByUsername = (username, callback) => {
 
   axios(options)
   .then(function(response) {
-    save(response.data);
-    callback(response.data);
+    // note that when you call save function in this block, it works and writes to db
+    // right now you pass the data into callback, but inside the cb (in getReposByUsername), the data is undefined
+    console.log('response data inside axios .then ', response.data)
+    callback(response.data)
   })
   .catch(function(error) {
     console.error(error);

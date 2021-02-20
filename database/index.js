@@ -32,9 +32,10 @@ let save = (repoData) => {
     })
     newRepo.save(function(err, newRepo) {
       if (err) return console.error(err);
-      console.log(newRepo);
+      // console.log(newRepo);
     })
   })
+  console.log('finished writing to db')
 }
 
 module.exports.save = save;

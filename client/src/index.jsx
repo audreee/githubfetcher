@@ -28,9 +28,9 @@ class App extends React.Component {
       data: username,
       contentType: "application/json; charset=utf-8",
       success: callback,
-      error: (err) => {
-        console.error(err);
-      }
+      // error: (err) => {
+      //   console.error(err);
+      // }
     });
 
     // $.ajax({
