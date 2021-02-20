@@ -18,14 +18,19 @@ app.post('/repos', (req, res) => {
   let username = req.body.username;
 
   getReposByUsername(username, (err, data) => {
-    console.log('data inside getRepos ', data);
+    // console.log('data inside getRepos ', data);
     if (err) {
       console.log('error at getReposByUsername');
       res.send(400);
     } else {
       // console.log(data);
-      save(data);
-      res.status(201).send(data);
+      save(data, (err, savedData) => {
+        if (err) {
+          console.error(err);
+        } else {
+          res.status(201).send(savedData)
+        }
+      });
     }
   });
 });
