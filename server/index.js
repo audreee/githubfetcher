@@ -1,8 +1,10 @@
 const express = require('express');
-const getReposByUsername = require('../helpers/github.js');
+const getReposByUsername = require('../helpers/github.js').getReposByUsername;
 let app = express();
 
 app.use(express.static(__dirname + '/../client/dist'));
+
+app.use(express.json());
 
 app.post('/repos', function (req, res) {
   // TODO - your code here!
@@ -10,10 +12,11 @@ app.post('/repos', function (req, res) {
   // and get the repo information from the github API, then
   // save the repo information in the database
 
-  let username = req.params;
+  let username = req.body.username;
+  console.log(username);
   getReposByUsername(username, (err, data) => {
     if (err) {
-      console.error(error);
+      console.error(err);
       res.send(400);
     } else {
       res.status(201).send(data);
