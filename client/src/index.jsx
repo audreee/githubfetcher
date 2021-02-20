@@ -51,7 +51,7 @@ class App extends React.Component {
 
   render () {
     return (<div>
-      <h1>Github Fetcher</h1>
+      <h1 onClick={e => this.getTopRepos(this.handleGetTopReposResults)}>Github Fetcher</h1>
       <RepoList repos={this.state.repos}/>
       <Search handleSearchResults={this.handleSearchResults} onSearch={this.search.bind(this)}/>
     </div>)
