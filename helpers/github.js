@@ -22,7 +22,7 @@ let getReposByUsername = (username, callback) => {
     // note that when you call save function in this block, it works and writes to db
     // right now you pass the data into callback, but inside the cb (in getReposByUsername), the data is undefined
     console.log('response data inside axios .then ', response.data)
-    callback(response.data)
+    callback(null, response.data)
   })
   .catch(function(error) {
     console.error(error);
