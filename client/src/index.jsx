@@ -11,6 +11,7 @@ class App extends React.Component {
       repos: []
     }
     this.handleSearchResults = this.handleSearchResults.bind(this);
+    this.handleGetTopReposResults = this.handleGetTopReposResults.bind(this);
   }
 
   handleSearchResults(returnedRepos) {
@@ -18,10 +19,8 @@ class App extends React.Component {
     // console.log(returnedRepos);
   }
 
-  search (username, callback) {
+  search(username, callback) {
     username = JSON.stringify(username)
-    console.log('username ', username)
-
     $.ajax({
       type: "POST",
       url: '/repos',
@@ -32,19 +31,22 @@ class App extends React.Component {
       //   console.error(err);
       // }
     });
+  }
 
-    // $.ajax({
-    //   type: "POST",
-    //   url: '/repos',
-    //   data: username,
-    //   contentType: "application/json; charset=utf-8"})
-    //   .done(results => {
-    //     console.log(results);
-    //     this.handleSearchResults(results);
-    //   })
-    //   .error(err => {
-    //     console.error(err);
-    //   })
+  getTopRepos(callback) {
+    $.ajax({
+      type: "GET",
+      url: '/repos',
+      success: callback
+    })
+  }
+
+  handleGetTopReposResults(topRepos) {
+    this.setState({repos: topRepos});
+  }
+
+  componentDidMount() {
+    this.getTopRepos(this.handleGetTopReposResults);
   }
 
   render () {
@@ -55,5 +57,6 @@ class App extends React.Component {
     </div>)
   }
 }
+
 
 ReactDOM.render(<App />, document.getElementById('app'));
