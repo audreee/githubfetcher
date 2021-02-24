@@ -21,17 +21,13 @@ let repoSchema = mongoose.Schema({
 let Repo = mongoose.model('Repo', repoSchema);
 
 let save = (repoData, callback) => {
-  // TODO: Your code here
-  // This function should save a repo or repos to
-  // the MongoDB
-
   mongoose.Promise.all(repoData.map(repo => {
     newRepo = new Repo({
       _id: repo.id,
       owner_id: repo.owner.id,
       owner_name: repo.owner.login,
       name: repo.name,
-      url: repo.url,
+      url: repo.html_url,
       forks_count: repo.forks_count
     })
     newRepo.save();

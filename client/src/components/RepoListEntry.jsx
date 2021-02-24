@@ -4,8 +4,7 @@ let RepoListEntry = ({repo}) => {
   return (
   <tr>
     <td>{repo.owner_name}</td>
-    <td>{repo.name}</td>
-    <td>{repo.url}</td>
+    <td><a href={repo.url}>{repo.name}</a></td>
     <td>{repo.forks_count}</td>
   </tr>
   )

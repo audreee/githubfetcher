@@ -16,7 +16,6 @@ class App extends React.Component {
 
   handleSearchResults(returnedRepos) {
     this.setState({repos: returnedRepos});
-    // console.log(returnedRepos);
   }
 
   search(username, callback) {
@@ -27,9 +26,6 @@ class App extends React.Component {
       data: username,
       contentType: "application/json; charset=utf-8",
       success: callback,
-      // error: (err) => {
-      //   console.error(err);
-      // }
     });
   }
 
@@ -57,6 +53,5 @@ class App extends React.Component {
     </div>)
   }
 }
-
 
 ReactDOM.render(<App />, document.getElementById('app'));
